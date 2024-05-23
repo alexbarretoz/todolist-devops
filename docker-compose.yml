@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  vote:
+    container_name: 
+    image: 
+    ports:
+      - 5000:80
+    depends_on:
+      - redis
+
+  db:
+    container_name: db
+    image: mysql:5.7
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+ 
+  
+  phpmyadminn:
+    container_name: phpmyadmin
+    image: phpmyadmin:apache
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "prueba@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "prueba1234"
+    ports:
+      - 5002:80
+  
+  
+ 
+
