@@ -6,8 +6,8 @@ services:
     image: 
     ports:
       - 5000:80
-    depends_on:
-      - redis
+ 
+ 
 
   db:
     container_name: db
