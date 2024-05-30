@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  mysqldb:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: todo
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - 3307:3306
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin:5.2.1-fpm
+    restart: always
+    depends_on:
+      - mysqldb
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysqldb
+      MYSQL_ROOT_PASSWORD: password
+    
+  app:
+    build: .
+    depends_on:
+      - mysqldb
+    links:
+      - mysqldb
+    ports:
+      - 3000:3000
+    
+ 
+  
+  
+  
+ 
+
