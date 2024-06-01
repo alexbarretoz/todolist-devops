@@ -10,10 +10,11 @@ services:
       MYSQL_PASSWORD: password
     ports:
       - 3307:3306
+  
 
   phpmyadmin:
     container_name: phpmyadmin
-    image: phpmyadmin:5.2.1-fpm
+    image: phpmyadmin:latest
     restart: always
     depends_on:
       - mysqldb
@@ -23,6 +24,7 @@ services:
       PMA_HOST: mysqldb
       MYSQL_ROOT_PASSWORD: password
     
+    
   app:
     build: .
     depends_on:
@@ -31,8 +33,13 @@ services:
       - mysqldb
     ports:
       - 3000:3000
-    
- 
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_DB: todo
+  
+
   
   
   
